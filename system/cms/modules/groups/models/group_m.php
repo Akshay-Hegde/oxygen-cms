@@ -93,6 +93,7 @@ class Group_m extends MY_Model
 		return parent::insert(array(
 			'name'			        => $input['name'],
 			'description'	        => $input['description'],
+			'authority'	        	=> 10,
 		));
 	}
 

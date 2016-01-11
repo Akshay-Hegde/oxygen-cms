@@ -67,9 +67,9 @@
 
 		$groups = 
 		[
-			['name' => 'admin', 			'description' => 'Administrator','authority' => 0],
-			['name' => 'user', 				'description' => 'User','authority' => 10],
-			//['name' => 'content-editor', 	'description' => 'Content Editor',],
+			['name' => 'admin', 			'description' => 'Administrator',	'authority' => 0],			
+			//['name' => 'content-editor', 	'description' => 'User',			'authority' => 5],				
+			['name' => 'user', 				'description' => 'User',			'authority' => 10],
 		];
 
 		foreach ($groups as $group)
