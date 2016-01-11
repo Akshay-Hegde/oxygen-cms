@@ -1,0 +1,58 @@
+
+			<?php if($this->session->flashdata('success') OR $this->session->flashdata('notice') OR $this->session->flashdata('error') OR validation_errors() ):?>
+			    
+
+					<?php if ($this->session->flashdata('error')): ?>
+		            <div class="callout callout-danger">
+		              <h4>Error</h4>
+		              <p><?php echo $this->session->flashdata('error'); ?></p>
+		            </div>
+					<?php endif; ?>
+
+					<?php if (validation_errors()): ?>
+		            <div class="callout callout-danger">
+		              <h4>Error</h4>
+		              <p><?php echo validation_errors(); ?></p>
+		            </div>					
+					<?php endif; ?>
+
+					<?php if ( ! empty($messages['error'])): ?>
+		            <div class="callout callout-danger">
+		              <h4>Error</h4>
+		              <p><?php echo $messages['error']; ?></p>
+		            </div>					
+					<?php endif; ?>
+
+
+
+					<?php if ($this->session->flashdata('notice')): ?>
+		            <div class="callout callout-info">
+		              <h4>Notice</h4>
+		              <p><?php echo $this->session->flashdata('notice');?></p>
+		            </div>						
+					<?php endif; ?>
+
+					<?php if ( ! empty($messages['notice'])): ?>
+		            <div class="callout callout-info">
+		              <h4>Notice</h4>
+		             <p><?php echo $messages['notice']; ?></p>
+		            </div>						
+					<?php endif; ?>
+
+					
+					<?php if ($this->session->flashdata('success')): ?>
+		            <div class="callout callout-success">
+		              <h4>Success</h4>
+		              <p><?php echo $this->session->flashdata('success');?></p>
+		            </div>						
+					<?php endif; ?>
+
+					<?php if ( ! empty($messages['success'])): ?>
+		            <div class="callout callout-success">
+		              <h4>Success</h4>
+		             <p><?php echo $messages['success']; ?></p>
+		            </div>						
+					<?php endif; ?>
+
+
+			 <?php endif; ?>

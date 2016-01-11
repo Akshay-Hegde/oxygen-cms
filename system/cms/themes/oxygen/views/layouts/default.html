@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>
+			{{ settings:site_name }} - {{ template:title }}
+		</title>
+		<!-- All other meta and head info kept away in a partial -->
+		{{ theme:partial name="xcommon/meta" }}	
+
+	</head>
+
+	<body class="skin-blue layout-top-nav">
+
+		<div class="wrapper">
+
+			<header class="main-header">               
+				<nav class="navbar navbar-static-top">
+					<div class="container">
+						{{ theme:partial name="navigation/nav" }}
+					</div>
+				</nav>
+			</header>
+
+			<!-- Full Width Column -->
+			<div class="content-wrapper">
+				<div class="container">
+
+				  <section class="content-header">
+						{{ layout:placeholder name="title" }}
+						  <h1>
+							  <!-- dont remove the h1 tag-->
+							  <small></small>
+						  </h1>
+						{{ /layout:placeholder }}            
+
+						{{ theme:partial name="xcommon/breadcrumbs" }}
+					</section>
+
+					<section class="content">
+
+						{{ theme:partial name="messages/all" }}
+				  
+						{{ template:body }}
+
+					</section>
+				</div>
+			</div>
+
+			{{ theme:partial name="footer/full" }}
+		</div>
+
+		{{ theme:js file="bootstrap.min.js" }}
+		{{ theme:js file="app.js" }}
+
+	</body>
+
+</html>

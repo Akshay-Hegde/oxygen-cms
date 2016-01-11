@@ -1,0 +1,49 @@
+
+
+	
+	<input id="link-id" type="hidden" value="<?php echo $link->id ?>" />
+	<input id="link-uri" type="hidden" value="<?php echo ! empty($link->uri) ? $link->uri : '' ?>" />
+
+	<fieldset>
+		<legend><?php echo lang('nav:details_label') ?></legend>
+		<p>
+			<strong>ID:</strong> #<?php echo $link->id ?>
+		</p>
+
+		<p>
+			<strong><?php echo lang('global:title');?>:</strong> <?php echo $link->title ?>
+		</p>
+		
+		<p>
+			<strong><?php echo lang('nav:target_label');?>:</strong> <?php echo (!empty($link->target)) ? lang('nav:link_target_blank') : lang('nav:link_target_self') ?>
+		</p>
+		
+		<p>
+			<strong><?php echo lang('nav:class_label');?>:</strong> <?php echo $link->class ?>
+		</p>
+		<p>
+			<strong><?php echo lang('nav:data_label');?>:</strong> <?php echo $link->data ?>
+		</p>
+		<p>
+			<strong><?php echo lang('nav:icon_label');?>:</strong> <?php echo $link->icon ?>
+		</p>		
+		<p>
+			<strong><?php echo lang('nav:type_label');?>:</strong> <?php echo $link->link_type ?>
+		</p>
+		
+		<p>
+			<strong><?php echo lang('nav:location_label');?>:</strong>
+			<a target="_blank" href="<?php echo $link->url ?>"><?php echo $link->url ?></a>
+		</p>
+		
+		<p>
+			<strong><?php echo lang('nav:restricted_to');?>:</strong> <?php echo $link->restricted_to ?>
+		</p>
+	</fieldset>	
+	
+	
+    <div class="modal-footer">
+		<?php echo anchor('admin/navigation/edit/' . $link->id, lang('global:edit'), 'rel="'.$link->navigation_group_id.'" class="btn btn-flat bg-blue as_modal_link"') ?>
+		<?php echo anchor('admin/navigation/delete/' . $link->id, lang('global:delete'), 'class="confirm btn btn-flat bg-red"') ?>
+      	<button type="button" class="btn btn-flat btn-default pull-left" data-dismiss="modal">Close</button>
+    </div>

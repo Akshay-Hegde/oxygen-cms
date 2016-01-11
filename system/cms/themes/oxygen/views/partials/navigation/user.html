@@ -1,0 +1,56 @@
+{{ if user:logged_in }} 
+		<li class="dropdown user user-menu">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+				   <?php echo gravatar_alt($this->current_user->email,['size'=>150,'class'=>'user-image']);?>
+				  <span class="hidden-xs">{{ user:display_name }}</span>
+				</a>
+				<ul class="dropdown-menu">
+				  <!-- User image -->
+				  <li class="user-header">
+					<?php echo gravatar_alt($this->current_user->email,['size'=>150,'class'=>'img-circle']);?>
+					<p>
+					  {{ user:display_name }}
+					  <small>{{ user:display_name }}</small>
+					</p>
+				  </li>
+				  <!-- Menu Body -->
+				  <li class="user-body">
+						  {{ if user:has_cp_permissions }}
+							  <div class="col-xs-4 text-center">
+								<a href="{{ url:site uri='admin' }}">{{ helper:lang line="global:control-panel" }}</a>
+							  </div>
+						  {{ endif }}
+						  <div class="col-xs-4 text-center">
+							<a href="{{ url:site }}users/change_password">Change Password</a>
+						  </div>
+				  </li>
+				  <!-- Menu Footer-->
+				  <li class="user-footer">
+					<div class="pull-left">
+					  <a class="btn btn-default btn-flat" href="{{x:uri}}edit-profile">Profile</a>
+					</div>
+					<div class="pull-right">
+					  <a class="btn btn-default btn-flat" href="{{url:site}}users/logout">Sign out</a>
+					</div>
+				  </li>
+				</ul>
+		  </li>
+
+{{ else }}
+		<li class="user user-menu">
+				<a href="{{url:site}}users/login" aria-expanded="false">
+				  {{theme:image file='avatar.png' class='user-image' size='150'}}
+				  <span class="hidden-xs">Login</span>
+				</a>
+		  </li>
+{{ endif }}
+
+
+
+
+
+
+
+
+
+

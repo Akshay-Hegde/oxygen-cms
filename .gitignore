@@ -1,0 +1,87 @@
+#
+# Project file
+#
+.DS_Store
+.buildpath
+.project
+.settings
+.idea
+nbproject/
+
+#
+# Sites directory
+#
+# - Its a good idea to leave the 
+# - default site structure, but 
+# - igore everything else
+#
+sites/*
+!sites/default
+!sites/default/*
+sites/default/cache/*
+sites/default/config/*
+sites/default/email/*
+sites/default/keys/*
+sites/default/files/*
+!sites/default/cache/index.html
+!sites/default/config/index.html
+!sites/default/email/index.html
+!sites/default/keys/index.html
+!sites/default/files/index.html
+sites/default/addons/*
+
+
+#
+# Shared addons
+#
+shared/*
+shared/field_types/*
+shared/modules/*
+shared/plugins/*
+shared/themes/*
+shared/widgets/*
+
+
+!shared/
+!shared/field_types/
+!shared/modules/
+!shared/plugins/
+!shared/themes/
+!shared/widgets/
+!shared/index.html
+!shared/widgets/index.html
+!shared/themes/index.html
+!shared/plugins/index.html
+!shared/field_types/index.html
+!shared/modules/index.html
+
+
+
+
+#
+# Assets and asset/cache
+#
+assets/*
+assets/cache/*
+assets/page_types/*
+assets/page_types/default/*
+!assets/index.html
+!assets/cache/
+!assets/index.html
+!assets/page_types/.htaccess
+!assets/page_types/default/
+!assets/page_types/default/.htaccess
+
+#
+# System core
+#
+system/cms/cache/*
+system/cms/logs/log-*.php
+system/cms/modules/sites/
+system/cms/modules/sites/*
+
+#
+# Exclude files from config
+#
+system/cms/config/config.php
+system/cms/config/database.php

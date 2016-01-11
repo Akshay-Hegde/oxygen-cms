@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<Theme>
+	<Details Version="1.0.0">
+		<Name>OxygenCMS</Name>
+		<Description>
+			This site is powered by OxygenCMS
+		</Description>
+		<Author Name="Sal McDonald">
+			<Websites>
+				<Site Name="Author Site" Url="http://oxygen-cms.com/" Link="true" />
+			</Websites>
+		</Author>
+	</Details>	
+</Theme>

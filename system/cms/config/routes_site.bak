@@ -1,0 +1,13 @@
+<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+/*
+ * Backup routes for single site
+ */
+$route['register'] = 'users/register';
+$route['user/(:any)'] = 'users/view/$1';
+$route['my-profile'] = 'users/index';
+$route['edit-profile'] = 'users/edit';
+$route['user/change-password'] = 'users/change_password';
+$route['sitemap.xml'] = 'sitemap/xml';
+$route['subscriptions/(:any)?'] = 'subscriptions/index$1';
+/* End of file routes.php */

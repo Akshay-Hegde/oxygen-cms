@@ -1,0 +1,5 @@
+
+.tasks-data table { width: 100%; }
+.tasks-data th { font-weight: bold; border-bottom: 1px solid #d8d8d8; }
+.tasks-data th,td { padding: 5px; width: 50%; text-align: center; }
+.tasks-data td { background-color: #f2f2f2; }

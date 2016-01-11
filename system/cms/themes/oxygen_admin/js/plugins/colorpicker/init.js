@@ -1,0 +1,2 @@
+    //Colorpicker
+    $(".colorpicker").colorpicker();
