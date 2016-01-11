@@ -35,7 +35,7 @@
 				<label for="authority">Authority Level<span>*</span></label>
 
 
-				<?php if($can_edit): ?>
+				<?php if($can_edit AND $group->name != 'admin'): ?>
 					<div class="input">
 							<?php 
 								if (!isset($group->authority)) $group->authority = 10; 
@@ -64,18 +64,14 @@
 									],
 								];
 
-								//lets remove the items that are not allowed
+								// lets remove the items that are not allowed
 								if($this->current_user->group !=='admin'):
 									foreach($authority_list as &$auth_group):
-
 										foreach($auth_group as $authority_item => $text):
-											
 											if($max_auth>=$authority_item):
 												unset($auth_group[$authority_item]);
 											endif;
-
 										endforeach;
-
 									endforeach;
 								endif;
 								echo form_dropdown('authority',$authority_list ,$group->authority,'class="form-control"');
@@ -83,7 +79,9 @@
 						<br><br>
 					</div>						
 				<?php else: ?>
-					You can not change the authority level for this group
+					<p>
+						You can not change the authority level for this group
+					</p>
 					<?php echo form_hidden('authority',$group->authority);?>
 				<?php endif; ?>
 			
