@@ -57,9 +57,6 @@ class Admin extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
-		//set new layout
-		
 		
 		// Load the required classes
 		$this->load->model('user_m');
@@ -70,9 +67,17 @@ class Admin extends Admin_Controller
 
 		$this->load->helper('users/field_forms');
 
+		$this->current_user->group_data = $this->group_m->get_by('name',$this->current_user->group);
+
+
+		//can the editor change the authority of the group
+		//$can_edit = ($this->current_user->group_data->authority <= $group->authority)?true:false;
+		//$max_auth = $this->current_user->group_data->authority;		
+
 		if ($this->current_user->group != 'admin') 
 		{
-			$this->template->groups = $this->group_m->where_not_in('name', 'admin')->get_all();
+			//$this->template->groups = $this->group_m->where_not_in('name', 'admin')->get_all();
+			$this->template->groups = $this->group_m->where('authority >=',$this->current_user->group_data->authority)->get_all();
 		} 
 		else 
 		{
@@ -80,6 +85,7 @@ class Admin extends Admin_Controller
 		}
 		
 		$this->template->groups_select = array_for_select($this->template->groups, 'id', 'description');
+
 	}
 
 	/**
@@ -113,6 +119,8 @@ class Admin extends Admin_Controller
 		$this->db->order_by('active', 'desc')
 			->join('users_groups', 'users_groups.id = users.group_id')
 			->where_not_in('users_groups.name', $skip_admin)
+			->where('users_groups.authority >', $this->current_user->group_data->authority)
+			->or_where('users.id', $this->current_user->id)
 			->limit($pagination['limit'], $pagination['offset']);
 
 		$users = $this->user_m->get_many_by($base_where);
@@ -404,6 +412,7 @@ class Admin extends Admin_Controller
 	 */
 	public function edit($id = 0)
 	{
+
 		// Get the user's data
 		if ( ! ($member = $this->ion_auth->get_user($id)))
 		{
@@ -412,13 +421,29 @@ class Admin extends Admin_Controller
 		}
 
 
+		//
 		// Check to see if the current user is NOT admin, but trying to edit an admin. This action should not be allowed.
+		// Even if the 2 users are the same Authority (i.e == 0), the edirtor can not modify the admin.
+		//
 		if($this->current_user->group !== 'admin' and (($member->group_id === 1) || $member->group ===  'admin')  )
 		{
 			$this->session->set_flashdata('error', 'You are not allowed to edit this profile' );
 			redirect('admin/users');
 		}
 		
+
+		// Check to see if the editor has higher access, if not they are not allowed
+		// to access the edit page
+		if($member->group = $this->group_m->get($member->group_id))
+		{
+			if($this->current_user->group_data->authority > $member->group->authority)
+			{
+				$this->session->set_flashdata('error','You do not have access to edit this user.');
+				redirect('admin/users');
+			}
+		}
+
+
 		// Check to see if we are changing usernames
 		if ($member->username != $this->input->post('username'))
 		{

@@ -13,12 +13,15 @@
 class Admin extends Admin_Controller
 {
 
+	protected $section = 'groups'; 
+	
 	/**
 	 * Constructor method
 	 */
 	public function __construct()
 	{
 		parent::__construct();
+
 
 		// Load the required classes
 		$this->load->library('form_validation');
@@ -49,9 +52,13 @@ class Admin extends Admin_Controller
 	 */
 	public function index()
 	{
-		//this page can now use the new layout
 
-		$groups = $this->group_m->get_all();
+		$this->current_user OR redirect('admin');
+
+		//this page can now use the new layout
+		$groups = $this->group_m->order_by('authority','asc')->get_all();
+
+		$this->current_user->group_data =  $this->group_m->get_by('name',$this->current_user->group);
 
 		$this->template
 			->title($this->module_details['name'])
@@ -60,12 +67,14 @@ class Admin extends Admin_Controller
 	}
 
 
-
 	/**
 	 * Create a new group role
 	 */
 	public function add()
 	{
+
+		$this->current_user->group_data =  $this->group_m->get_by('name',$this->current_user->group);
+		$max_auth = $this->current_user->group_data->authority;		
 		
 		$group = new stdClass();
 
@@ -103,9 +112,10 @@ class Admin extends Admin_Controller
 			->set_layout(false)
 			->title($this->module_details['name'], lang('groups:add_title'))
 			->set('group', $group)
+			->set('can_edit', true)
+			->set('max_auth', $max_auth)					
 			->build('admin/form');
 	}
-
 
 	/**
 	 * Edit a group role
@@ -114,10 +124,14 @@ class Admin extends Admin_Controller
 	 */
 	public function edit($id = 0)
 	{
-
-		
+		$this->current_user OR redirect('admin/groups');
+		$this->current_user->group_data =  $this->group_m->get_by('name',$this->current_user->group);
 
 		$group = $this->group_m->get($id);
+
+		//can the editor change the authority of the group
+		$can_edit = ($this->current_user->group_data->authority <= $group->authority)?true:false;
+		$max_auth = $this->current_user->group_data->authority;
 
 		// Make sure we found something
 		$group or redirect('admin/groups');
@@ -156,6 +170,8 @@ class Admin extends Admin_Controller
 		$this->template
 			->title($this->module_details['name'], sprintf(lang('groups:edit_title'), $group->name))
 			->set('group', $group)
+			->set('can_edit', $can_edit)
+			->set('max_auth', $max_auth)		
 			->build('admin/form');
 	}
 
@@ -166,10 +182,21 @@ class Admin extends Admin_Controller
 	 */
 	public function delete($id = 0)
 	{
+		
+		$this->current_user OR redirect('admin');
+
+		$this->current_user->group_data =  $this->group_m->get_by('name',$this->current_user->group);
+
 
 		// First lets get the group
 		if($group = $this->group_m->get($id))
 		{
+			if($this->current_user->group_data->authority >= $group->authority)
+			{
+				$this->session->set_flashdata('error','You do not have access to delete this group.');
+				redirect('admin/groups');
+			}
+
 			//double check to see its not a core group
 			if ( in_array($group->name, array('user', 'admin')))
 			{

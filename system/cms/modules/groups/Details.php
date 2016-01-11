@@ -1,10 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
-
 /**
+ * OxygenCMS
+ * 
  * Groups module
  *
- * @author PyroCMS Dev Team
- * @package PyroCMS\Core\Modules\Groups
+ * @author      OxygenCMS Dev Team 2015
+ * @author      PyroCMS Dev Team 2008-2014
+ * @copyright   Copyright (c) 2012, PyroCMS LLC
+ * @copyright   Copyright (c) 2016, OxygenCMS 
+ *
+ * @package 	OxygenCMS\Core\Modules\Groups
+ *
  */
  class Module_Groups extends Module
 {
@@ -26,11 +32,27 @@
 			'frontend' => false,
 			'backend' => true,
 			'menu' => false,
-			'shortcuts' => [],
 			'icon'		=> 'fa fa-users',
+			'sections' => 
+			[
+				'groups' => 
+				[
+					'name' 	=> 'groups:user_groups',
+					'uri' 	=> 'admin/groups',
+					'shortcuts' => 
+					[
+						'create' => 
+						[
+							'name' 	=> 'groups:add_title',
+							'uri' 	=> 'admin/groups/add',
+							'modal' => true,
+						]
+					]
+				]
+			]			
+
 		];
 	}
-
 
     public function admin_menu(&$menu)
     {
@@ -43,7 +65,6 @@
 			'permission' 	=> '',
 		];
 	}
-
 
 	public function install()
 	{

@@ -1,7 +1,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <div class="box box-danger">
+        <div class="box box-solid">
 
             <div class="box-header">
               <h3 class="box-title">Set permissions for : <?php echo $group->description ?> (Group)</h3>

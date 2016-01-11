@@ -11,7 +11,26 @@
  *
  * @package		PyroCMS\Core\Modules\Theme\Helpers
  */
-
+if ( ! function_exists('anchor_if'))
+{
+	/**
+	 * Anchor (IF) condition Link
+	 *
+	 * Creates an anchor based on the local URL only if the condition is met.
+	 *
+	 * @param	string	the URL
+	 * @param	string	the link title
+	 * @param	mixed	any attributes
+	 * @return	string
+	 */
+	function anchor_if($condition, $uri = '', $title = '', $attributes = '')
+	{
+		if($condition) {
+			return anchor($uri, $title, $attributes );
+		}
+		return $title;
+	}
+}
 if (!function_exists('add_template_section'))
 {
 	function add_template_section($obj,$section,$text,$path,$shortcust=[])

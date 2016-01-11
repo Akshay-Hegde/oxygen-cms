@@ -1,9 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 // labels
+$lang['groups:user_groups']				= 'User Groups';
 $lang['groups:title']					= 'Title';
 $lang['groups:name']				    = 'Name';
 $lang['groups:short_name']				= 'Short Name';
+$lang['groups:authority']				= 'Authority Level';
+
 
 // titles
 $lang['groups:index_title']             = 'List Groups';

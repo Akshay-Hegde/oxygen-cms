@@ -93,7 +93,7 @@ class Group_m extends MY_Model
 		return parent::insert(array(
 			'name'			        => $input['name'],
 			'description'	        => $input['description'],
-			'authority'	        	=> 10,
+			'authority'	        	=> isset($input['authority']) ? $input['authority']  : 10 ,
 		));
 	}
 
@@ -107,10 +107,18 @@ class Group_m extends MY_Model
 	 */
 	public function update($id = 0, $input = [], $skip_validation = false)
 	{
-		return parent::update($id, array(
+		$update = 
+		[
 			'name'					=> $input['name'],
 			'description'			=> $input['description'],
-		));
+		];
+
+		if(isset($input['authority'])):
+			$update['authority']  = $input['authority'];
+		endif;
+
+		return  parent::update($id, $update);
+
 	}
 
 	/**
