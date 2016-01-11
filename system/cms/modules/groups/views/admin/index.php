@@ -51,12 +51,12 @@
 										if(($this->current_user->group == 'admin') OR $this->current_user->group_data->authority < $group->authority):
 											echo anchor('admin/groups/edit/'.$group->id, lang('buttons:edit'), 'class="btn btn-sm bg-blue btn-flat edit"').' ';
 										endif; 
+							
+										if ( (($this->current_user->group == 'admin') AND ($group->is_core == 0) ) OR  ($group->is_core == 0) AND ($this->current_user->group_data->authority < $group->authority)): 
+											echo anchor('admin/groups/delete/'.$group->id, lang('buttons:delete'), 'class="confirm btn-sm btn bg-red btn-flat delete"').' ';
+										endif;
 
 										if($this->current_user->group_data->authority < $group->authority):
-											if ( ! in_array($group->name, array('user', 'admin')) AND ($this->current_user->group_data->authority < $group->authority)): 
-												echo anchor('admin/groups/delete/'.$group->id, lang('buttons:delete'), 'class="confirm btn-sm btn bg-red btn-flat delete"').' ';
-											endif;
-
 											if ( ! in_array($group->name, array('admin'))):
 												echo anchor('admin/permissions/group/'.$group->id, lang('permissions:edit').' &rarr;', 'class="btn btn-sm bg-blue btn-flat edit"').' ';
 											endif; 

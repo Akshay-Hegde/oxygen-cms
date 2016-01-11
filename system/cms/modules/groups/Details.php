@@ -41,6 +41,11 @@
 					'uri' 	=> 'admin/groups',
 					'shortcuts' => 
 					[
+						'groups' => 
+						[
+							'name' 	=> 'groups:index_title',
+							'uri' 	=> 'admin/groups',
+						],				
 						'create' => 
 						[
 							'name' 	=> 'groups:add_title',
@@ -78,6 +83,7 @@
 				'name' 			=> 	['type' => 'VARCHAR', 'constraint' => 100,],
 				'description' 	=>  ['type' => 'VARCHAR', 'constraint' => 250, 'null' => true,],
 				'authority' 	=> 	['type' => 'INT', 'constraint' => 4, 'default' => 10, 'null'=>false],
+				'is_core' 		=> 	['type' => 'INT', 'constraint' => 1, 'default' => 0, 'null'=>true],
 			],
 		];
 
@@ -88,9 +94,9 @@
 
 		$groups = 
 		[
-			['name' => 'admin', 			'description' => 'Administrator',	'authority' => 0],			
-			//['name' => 'content-editor', 	'description' => 'User',			'authority' => 5],				
-			['name' => 'user', 				'description' => 'User',			'authority' => 10],
+			['name' => 'admin', 			'description' => 'Administrator',	'authority' => 0, 'is_core' => 1],
+			['name' => 'content-editor', 	'description' => 'Content Editor',	'authority' => 5, 'is_core' => 1],					
+			['name' => 'user', 				'description' => 'User',			'authority' => 10, 'is_core' => 1],	
 		];
 
 		foreach ($groups as $group)

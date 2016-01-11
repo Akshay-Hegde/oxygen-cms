@@ -47,7 +47,6 @@
 										1  => '1',
 										2  => '2',
 										3  => '3',
-
 									],
 									'Medium - For Content Editors' =>
 									[		

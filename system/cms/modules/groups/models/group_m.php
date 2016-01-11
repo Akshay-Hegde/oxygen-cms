@@ -90,6 +90,10 @@ class Group_m extends MY_Model
 	 */
 	public function insert($input = [], $skip_validation = false)
 	{
+		//do not allow another admin
+		if($input['name'] == 'admin')
+			return false;
+
 		return parent::insert(array(
 			'name'			        => $input['name'],
 			'description'	        => $input['description'],
@@ -107,6 +111,10 @@ class Group_m extends MY_Model
 	 */
 	public function update($id = 0, $input = [], $skip_validation = false)
 	{
+		//do not allow another admin
+		if($input['name'] == 'admin')
+			return false;
+					
 		$update = 
 		[
 			'name'					=> $input['name'],
