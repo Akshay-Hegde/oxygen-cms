@@ -42,21 +42,28 @@ class Module_Users extends Module {
 					[
 						'name' 	=> 'user:list_title',
 						'uri' 	=> 'admin/users',
-						'shortcuts' => [],
+						'shortcuts' => 
+						[
+							'newuser' => 
+							[
+								'name' 	=> 'user:add_title',
+								'uri' 	=> 'admin/users/create',
+							],												
+						]
 					],
 					'fields' => 
 					[
 						'name' 	=> 'user:profile_fields_label',
 						'uri' 	=> 'admin/users/fields',
-							'shortcuts' => 
+						'shortcuts' => 
+						[
+							'create' => 
 							[
-								'create' => 
-								[
-									'name' 	=> 'user:add_field',
-									'uri' 	=> 'admin/users/fields/create',
-									'class' => ''
-								]
+								'name' 	=> 'user:add_field',
+								'uri' 	=> 'admin/users/fields/create',
+								'class' => ''
 							]
+						]
 					]
 				];
 			}
@@ -82,7 +89,6 @@ class Module_Users extends Module {
 			'icon' 			=> 'fa fa-user',
 			'permission' 	=> '',
 		];
-
 
 		if (function_exists('group_has_role'))
 		{

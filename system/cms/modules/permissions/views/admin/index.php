@@ -13,9 +13,12 @@
 							<th style="width: 20%"><div style='float:right'>Action</div></th>
 						</tr>
 						<?php foreach ($groups as $group): ?>
+							<?php $cond = (($this->current_user->group_data->authority < $group->authority)); ?>
 						<tr>
 							<td><?php echo $group->id ?></td>
-							<td><a href='admin/groups/edit/<?php echo $group->id ?>'><?php echo $group->description ?></a></td>
+							<td>
+								<?php echo anchor_if($cond, 'admin/permissions/group/'.$group->id, $group->description, 'class=" "'); ?>
+							</td>
 							<td>
 									<div style='float:right'>
 									<?php if ($admin_group != $group->name):?>

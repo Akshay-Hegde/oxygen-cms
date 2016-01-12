@@ -23,6 +23,9 @@ class Admin extends Admin_Controller
 	    $this->load->model('groups/group_m');
 	    $this->lang->load('permissions');
 	    $this->lang->load('groups/group');
+	    
+		$this->current_user OR redirect('admin');
+		$this->current_user->group_data =  $this->group_m->get_by('name',$this->current_user->group);	    
 	}
 
 	/**
@@ -33,9 +36,16 @@ class Admin extends Admin_Controller
 	public function index() {
 
 		//this page can now use the new layout
+		if($this->current_user->group == 'admin'):
+			$groups = $this->group_m->order_by('authority','asc')->get_all_admin();
+		else:
+			$groups = $this->group_m->where('authority >',$this->current_user->group_data->authority)->order_by('authority','asc')->get_all_admin();
+		endif;
+
+		//this page can now use the new layout
 		$this->template
 			->set('admin_group', $this->config->item('admin_group', 'ion_auth'))
-			->set('groups', $this->group_m->get_all())
+			->set('groups', $groups)
 			->title($this->module_details['name'])
 			->build('admin/index');
 	}

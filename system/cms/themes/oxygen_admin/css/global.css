@@ -215,7 +215,16 @@ ul.form-list li {
   margin-bottom:8px;
 }
 
-
+ul.form-list li.form-label {
+  font-weight:bold;
+}
+ul.form-list li.form-item {
+  padding:4px;
+  margin-bottom: 4px;
+}
+ul.form-list label small {
+  display: block;
+}
 
 /**
  * Oxybuttons
