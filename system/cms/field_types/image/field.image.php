@@ -342,6 +342,7 @@ class Field_image
  	 * @param  object                 $field
  	 * @return mixed - true or error string
  	 */
+ 	/* --@todo: we need to check if the field is required, OR ! MY_Form_validation should be doing so.
  	public function validate($value, $mode, $field)
  	{
  		if (isset($_FILES[$field->field_slug . '_file']))
@@ -358,5 +359,6 @@ class Field_image
  
  		return true;
  	}	
+ 	*/
 
 }
