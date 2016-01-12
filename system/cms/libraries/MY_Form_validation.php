@@ -26,6 +26,15 @@ class MY_Form_validation extends CI_Form_validation
 	}
 
 	/**
+	 * Return the error as an array as we expect
+	 */
+    public function error_as_array()
+    {
+        return $this->_error_array;
+    }
+
+
+	/**
 	 * Alpha-numeric with underscores dots and dashes
 	 *
 	 * @param	string
