@@ -13,10 +13,8 @@ class Module_Forms extends Module
 	    $this->namespace = $this->ci->config->item('forms:namespace');
 	}
 
-
 	public function info()
 	{
-
 		$info =  
 		[
 			'name' => 
@@ -49,7 +47,6 @@ class Module_Forms extends Module
 			]
 		];
 
-
 		$info['sections']['admin_fields'] = 
 		[
 			'name' => 'Fields',
@@ -58,7 +55,6 @@ class Module_Forms extends Module
 		];	
 
 		return $info;
-
 	}
 
 	/*
@@ -108,9 +104,7 @@ class Module_Forms extends Module
 		}
 
 
-		$menu['lang:cp:nav_content']['menu_items'][] = $all_forms;
-
-	
+		$menu['lang:cp:nav_content']['menu_items'][] = $all_forms;	
 	}
 
 	public function install()
@@ -118,19 +112,16 @@ class Module_Forms extends Module
 		return false;
 	}
 
-
 	public function uninstall()
 	{
 		return false;
 	}
-
 
 	public function upgrade($old_version)
 	{
 		return false;
 	}
 
-	
     public function disable() 
     {
         return true;
@@ -145,6 +136,5 @@ class Module_Forms extends Module
 	{
 		return "No documentation has been added for this module.<br>Contact the module developer for assistance.";
 	}
-
 }
 /* End of file Details.php */

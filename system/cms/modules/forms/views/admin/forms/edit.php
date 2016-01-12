@@ -1,19 +1,13 @@
 <?php echo form_open(uri_string(), 'class="crud"'); ?>
 <div class="row">
-
-
 	<div class='col-xs-12'>
-
 		<div class="col-lg-4 col-md-4 col-xs-12">
-
-	        <div class="box box-primary">
-
+	        <div class="box box-solid">
 	            <div class="box-header with-border">
 	                <h3 class="box-title">
 						Edit form
 	                </h3>
 	            </div>
-
 	            <div class="box-body">
 	           
 					<div class="form_inputs">
@@ -51,6 +45,7 @@
 								<div class="input">
 									<?php echo form_input('email', $metadata->email, 'placeholder="Email address" class="form-control" autocomplete="off" id="email"'); ?>
 								</div>
+
 						<br>
 						<div class="float-right buttons">
 							<button type="submit" name="btnAction" value="save" class="btn btn-flat btn-primary"><span><?php echo lang('buttons:save'); ?></span></button>	
@@ -58,23 +53,16 @@
 							<a href="<?php echo site_url('admin/forms/forms'); ?>" class="btn btn-flat btn-default"><?php echo lang('buttons:cancel'); ?></a>
 						</div>	
 					</div>
-
-				
 	            </div>
 	        </div>
 	    </div>
-
 	    <div class="col-lg-8 col-md-8 col-xs-12">
-
-	        <div class="box box-primary">
-
+	        <div class="box box-solid">
 	            <div class="box-header with-border">
 	                <h3 class="box-title">
 						Form metadata
 	                </h3>
 	            </div>
-
-
 			    <div class="nav-tabs-custom" style="cursor: move;">
 		            <!-- Tabs within a box -->
 		            <ul class="nav nav-tabs ui-sortable-handle">
@@ -84,25 +72,17 @@
 		                  <?php if(group_has_role('forms','manage')):?>
 		                  	<li><a aria-expanded="false" href="#tabcontent-fields" data-toggle="tab">Other Options</a></li>
 		                  <?php endif;?>
-
-
-
 		            </ul>
-
 		            <div class="tab-content no-padding">
-
 		                <div class="tab-pane active"id="tabcontent-redirect" >
 				 			<?php echo $this->load->view('admin/partials/redirect_tab');?>
 						</div>
-
 		                <div class="tab-pane" id="tabcontent-messages" >
 				 			<?php echo $this->load->view('admin/partials/messages_tab');?>
 						</div>
-
 		                <div class="tab-pane" id="tabcontent-viewoptions" >
 				 			<?php echo $this->load->view('admin/partials/viewoptions_tab');?>
 						</div>
-
 						<?php if(group_has_role('forms','manage')):?>
 			                <div class="tab-pane" id="tabcontent-fields" >
 			                	<div class="box-body">
@@ -111,15 +91,10 @@
 					 			</div>
 							</div>
 						<?php endif;?>
-						
-						
 					</div>
 				</div>
-
 	        </div>
 	    </div> 
-
     </div>
-
 </div>
 <?php echo form_close();?>	

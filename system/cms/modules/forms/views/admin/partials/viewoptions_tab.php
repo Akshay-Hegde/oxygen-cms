@@ -2,7 +2,7 @@
 					<div class="box-body">
 					<div class="form_inputs">
 
-						<ul>
+						<ul class='form-list'>
 
 							<li>
 								<label for="stream_name"><?php echo lang('streams:id');?></label>

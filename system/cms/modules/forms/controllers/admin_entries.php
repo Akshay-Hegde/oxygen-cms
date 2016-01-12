@@ -19,9 +19,7 @@ class Admin_entries extends Admin_Controller
 	 */
 	public function __construct() 
 	{
-
 		parent::__construct();
-
 
         $this->load->driver('Streams');
 
@@ -46,10 +44,8 @@ class Admin_entries extends Admin_Controller
 	public function view( $list_slug = 'list_slug' ) 
 	{
 
-
         // Get the stream
 		$this->data->stream = $this->streams->streams->get_stream( $list_slug ,'forms');
-
 
 		$pagination_uri = null;
 		$pagination = null;
@@ -59,7 +55,6 @@ class Admin_entries extends Admin_Controller
 
 		$extra['buttons']	=
 		[
-			
 			[
 				'label' 	=> lang('global:view'),
 				'url'		=> 'admin/forms/entries/item/-entry_id-/'.$list_slug,
@@ -70,7 +65,6 @@ class Admin_entries extends Admin_Controller
 				'url'		=> 'admin/forms/entries/delete/-entry_id-/'.$list_slug,
 				'confirm'	=> true
 			]
-				
 		];
 
 		$this->streams->cp->entries_table($list_slug, $this->namespace, $pagination , $pagination_uri, $view_override, $extra);
@@ -102,7 +96,6 @@ class Admin_entries extends Admin_Controller
 		$extra['title'] = ''.$this->data->stream->stream_name.' &rarr; '.lang('streams:new_entry');
 
 		$this->streams->cp->entry_form($stream_slug, $this->namespace, 'edit', $entry_id, true, $extra,$skips,$tabs,$hidden,$defaults);	
-
 	}
 
 
@@ -124,5 +117,4 @@ class Admin_entries extends Admin_Controller
 
 		 redirect('admin/forms/entries/view/'.$stream_slug);
 	}
-	
 }

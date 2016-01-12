@@ -8,7 +8,6 @@ class Events_Forms {
     {
         $this->CI =& get_instance();
         Events::register('forms_postback', [$this, 'forms_postback'] );
-
         Events::trigger('forms_postback');
     }
 
@@ -38,7 +37,6 @@ class Events_Forms {
                 // Send email if they want it send
                 if(isset($input['forms_send_email']) AND $input['forms_send_email'] == 'true')
                 {
-
                     if($stream_row = $this->CI->db->where('stream_slug',$stream_slug)->get('data_streams')->row())
                     {
                         $this->CI->load->model('forms/metadata_m');
@@ -51,23 +49,18 @@ class Events_Forms {
                             $input['slug'] = 'contact'; //$metarow->email_template
 
                             //check if there is a email field
-                            /*
-                             if(isset($input['email'])) {
-                                $input['reply-to'] = $input['email'];
-                             }
-                             */
-
-
+                            if(isset($input[$metarow->replyto_field])) 
+                            {
+                                $input['reply-to'] = $input[$metarow->replyto_field];
+                                $input['from'] = $input[$metarow->replyto_field];
+                            }
+                            
                             Events::trigger('email', (array) $input);
                         }
-
-
                     }
-
                 }
 
                 $this->CI->session->set_flashdata('success', 'Success');   
-
                 $redir_to = $this->CI->input->post('redirect_success');          
             }
             else
@@ -77,9 +70,6 @@ class Events_Forms {
             }
 
             redirect($redir_to);
-
-
     	}
     }
- 
 }

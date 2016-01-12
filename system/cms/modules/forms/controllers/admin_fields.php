@@ -15,7 +15,6 @@ class Admin_fields extends Admin_Controller
 
 	protected $section = 'admin_fields';
 
-
 	public function __construct() 
     {
 
@@ -44,7 +43,6 @@ class Admin_fields extends Admin_Controller
      */
     public function index() 
     {
-
         $pagination = null;
         $pagination_uri = null;
         $view_override = false;
@@ -112,7 +110,6 @@ class Admin_fields extends Admin_Controller
             ->field_form($stream_slug, $this->namespace, 'new', $return, null, $include_types, $view_override, $extra);
     }
 
-
     public function edit( $assign_id = 0, $stream_slug='list_slug' ) 
     {
 
@@ -132,7 +129,6 @@ class Admin_fields extends Admin_Controller
             ->cp
             ->field_form($stream_slug, $this->namespace, 'edit', $return, $assign_id, $include_types, $view_override, $extra);
     }
-
 
     public function assign( $stream_slug='list_slug' ) 
     {
@@ -241,7 +237,6 @@ class Admin_fields extends Admin_Controller
         add_template_shortcuts($this,$this->section,$shortcuts);
     }   
 
-
     private function _manage_fields()
     {
 
@@ -327,6 +322,5 @@ class Admin_fields extends Admin_Controller
         
         }
     }
-
 
 }

@@ -13,7 +13,6 @@ class Entries extends Public_Controller
 
 	protected $section = 'entries';
 
-
 	/**
 	 * Sole constructor
 	 */
@@ -40,8 +39,6 @@ class Entries extends Public_Controller
         // Set the per page limitter
         $this->per_page = $this->config->item('forms:per_page');  
 	}
-
-
 
 
 	/**
@@ -76,5 +73,4 @@ class Entries extends Public_Controller
 		$this->streams->cp->entry_form($stream_slug, $this->namespace, 'new', null, true, $extra,$skips,$tabs,$hidden,$defaults);	
 
 	}
-	
 }

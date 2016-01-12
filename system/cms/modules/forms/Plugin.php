@@ -17,11 +17,7 @@ class Plugin_Forms extends Plugin
 	];
 
 
-	public function __construct()
-	{
-
-	}
-
+	public function __construct(){	}
 
 	public function display()
 	{
@@ -54,7 +50,6 @@ class Plugin_Forms extends Plugin
 
 	protected function _process( array $params )
 	{
-
 		// If we dont have a stream/form, we still want to produce, dont display the content
 		if ( ! $this->stream)
 		{
@@ -74,7 +69,6 @@ class Plugin_Forms extends Plugin
 		$defaults 		=  [];
 		$skips 			= []; 
 		$plugin 		= false;
-
 
 		$stream_fields = $this->streams_m->get_stream_fields($this->stream->id);
 		$this->fields->run_field_events($stream_fields, [], []);

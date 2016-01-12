@@ -2,7 +2,6 @@
 
 class Installer_Forms extends Component
 {
-
 	public $info;
 
 	public function __construct()
@@ -16,6 +15,7 @@ class Installer_Forms extends Component
 	{
 		return $this->info;
 	}
+
 	public function set_info($info)
 	{
 		$this->info = $info;
@@ -23,7 +23,6 @@ class Installer_Forms extends Component
 
 	public function install()
 	{
-
 		// We need a meta data table so that we can have extra info like "do we send an email on success post ?"
 		$tables = 
 		[
@@ -38,6 +37,7 @@ class Installer_Forms extends Component
 				'msg_error'			=> 	['type' => 'VARCHAR', 'constraint' => 1024, 'null' => true, 'default'=>'Oops, something went wrong..'],
 				'redir_success'		=> 	['type' => 'VARCHAR', 'constraint' => 1024, 'null' => true, 'default'=>'{{url:site}}'],
 				'redir_error'		=> 	['type' => 'VARCHAR', 'constraint' => 1024, 'null' => true, 'default'=>'{{url:current}}'],
+				'replyto_field'		=> 	['type' => 'VARCHAR', 'constraint' => 80, 'null' => true, 'default'=>'email'],
 			],
 		];
 
@@ -108,8 +108,6 @@ class Installer_Forms extends Component
 	{
 		return TRUE;
 	}
-
-
 	
     public function disable() 
     {
