@@ -57,12 +57,10 @@ class Admin extends Admin_Controller
 
 		//this page can now use the new layout
 		if($this->current_user->group == 'admin'):
-			$groups = $this->group_m->order_by('authority','asc')->get_all();
+			$groups = $this->group_m->order_by('authority','asc')->get_all_admin();
 		else:
-			$groups = $this->group_m->where('authority >',$this->current_user->group_data->authority)->order_by('authority','asc')->get_all();
+			$groups = $this->group_m->where('authority >',$this->current_user->group_data->authority)->order_by('authority','asc')->get_all_admin();
 		endif;
-
-		$this->current_user->group_data =  $this->group_m->get_by('name',$this->current_user->group);
 
 		$this->template
 			->title($this->module_details['name'])

@@ -23,17 +23,17 @@
 		[
 			'name' => 
 			[
-				'en' => 'Groups',
+				'en' 	=> 'Groups',
 			],
 			'description' => 
 			[
-				'en' => 'Users can be placed into groups to manage permissions.',
+				'en' 	=> 'Users can be placed into groups to manage permissions.',
 			],
-			'frontend' => false,
-			'backend' => true,
-			'menu' => false,
+			'frontend' 	=> false,
+			'backend' 	=> true,
+			'menu' 		=> false,
 			'icon'		=> 'fa fa-users',
-			'sections' => 
+			'sections' 	=> 
 			[
 				'groups' => 
 				[
@@ -84,6 +84,7 @@
 				'description' 	=>  ['type' => 'VARCHAR', 'constraint' => 250, 'null' => true,],
 				'authority' 	=> 	['type' => 'INT', 'constraint' => 4, 'default' => 10, 'null'=>false],
 				'is_core' 		=> 	['type' => 'INT', 'constraint' => 1, 'default' => 0, 'null'=>true],
+				'active' 		=> 	['type' => 'INT', 'constraint' => 1, 'default' => 1, 'null'=>false], //future to disable by group
 			],
 		];
 
@@ -94,9 +95,9 @@
 
 		$groups = 
 		[
-			['name' => 'admin', 			'description' => 'Administrator',	'authority' => 0, 'is_core' => 1],
-			['name' => 'content-editor', 	'description' => 'Content Editor',	'authority' => 5, 'is_core' => 1],					
-			['name' => 'user', 				'description' => 'User',			'authority' => 10, 'is_core' => 1],	
+			['name' => 'admin', 			'description' => 'Administrator',	'authority' => 0, 'is_core' => 1, 'active' => 1],
+			['name' => 'content-editor', 	'description' => 'Content Editor',	'authority' => 5, 'is_core' => 1, 'active' => 1],			
+			['name' => 'user', 				'description' => 'User',			'authority' => 10, 'is_core' => 1, 'active' => 1],
 		];
 
 		foreach ($groups as $group)

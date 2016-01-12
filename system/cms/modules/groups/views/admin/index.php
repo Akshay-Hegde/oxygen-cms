@@ -16,6 +16,7 @@
 							<th style="width: 30%"><?php echo lang('groups:name') ?></th>
 							<th style="width: 10%"><?php echo lang('groups:short_name');?></th>
 							<th><?php echo lang('groups:authority') ?></th>
+							<th><?php echo lang('groups:member_count') ?></th>
 							<th style="width: 30%"><div style='float:right'>Actions</div></th>
 						</tr>
 					</thead>
@@ -42,8 +43,11 @@
 									<?php echo anchor_if($cond, 'admin/groups/edit/'.$group->id, $group->name, 'class=" "'); ?>
 								</td>
 								<td>
-									<?php echo $group->authority;?>
-								</td>											
+									<?php echo $group->authority; ?>
+								</td>
+								<td>
+									<?php echo $group->member_count; ?>
+								</td>																					
 								<td class="actions">
 									<div style='float:right'>
 									<?php 

@@ -60,6 +60,7 @@ class Group_m extends MY_Model
 	 * @param array $params Optional parameters
 	 * @return array
 	 */
+
 	public function get_all($params = [])
 	{
 		if ( isset($params['except']) )
@@ -69,6 +70,54 @@ class Group_m extends MY_Model
 
 		return parent::get_all();
 	}
+
+	/*
+	 * This needs more work before it can replace the original
+	 * 
+	public function get_all($params = [])
+	{
+
+		$users_table = $this->db->dbprefix('users');
+		$groups_table = $this->db->dbprefix('users_groups');
+		$sql = "select g.id,
+				   count(*) as members_count
+				   from
+					   $groups_table g,
+					   $users_table u
+				   where 
+					   g.id = u.group_id
+				   group by
+					   g.id";
+
+		$result = $this->db->query( $sql );		       
+			
+		return $result->result();
+
+	}
+	*/
+
+
+
+	/**
+	 * Same as get_all() but includes data of no. of users in group
+	 */
+	public function get_all_admin($params = [])
+	{
+		if ( isset($params['except']) )
+		{
+			$this->db->where_not_in('name', $params['except']);
+		}
+
+		$groups = parent::get_all();
+
+		foreach($groups as &$g)
+		{
+			$g->member_count = $this->db->where('group_id',$g->id)->from('users')->count_all_results();
+		}
+
+		return $groups;
+	}
+
 
 	public function get_all_select($params = [])
 	{
@@ -152,4 +201,6 @@ class Group_m extends MY_Model
 
 		return parent::delete($id);
 	}
+
+
 }

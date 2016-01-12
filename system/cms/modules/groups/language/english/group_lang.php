@@ -6,6 +6,8 @@ $lang['groups:title']					= 'Title';
 $lang['groups:name']				    = 'Name';
 $lang['groups:short_name']				= 'Short Name';
 $lang['groups:authority']				= 'Authority Level';
+$lang['groups:member_count']			= 'Total members';
+
 
 
 // titles
