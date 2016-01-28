@@ -330,44 +330,43 @@ class Admin extends Admin_Controller {
 
 		// Run our validation. At this point, this is running the
 		// compiled validation for both stream and standard.
-		//if ($this->form_validation->run())
-		//{
-		if ($input = $this->input->post())
-		{			
-			
-
-			// do they have permission to proceed?
-			if ($input['status'] == 'live')
-			{
-				role_or_die('pages', 'manage_pages');
-			}
-
-			// We need to manually add this since we don't allow
-			// users to change it in the page form.
-			$input['type_id'] = $page_type_id;
-
-			// Insert the page data, along with
-			// the stream data.
-			if ($id = $this->page_m->create($input, $stream))
-			{
-				$this->createTimelineEvent($id,'created',true);
-				if (isset($input['navigation_group_id']) and count($input['navigation_group_id']) > 0)
+		if ($this->form_validation->run())
+		{
+			if ($input = $this->input->post())
+			{			
+				
+				// do they have permission to proceed?
+				if ($input['status'] == 'live')
 				{
-					$this->oxycache->delete_all('page_m');
-					$this->oxycache->delete_all('navigation_m');
+					role_or_die('pages', 'manage_pages');
 				}
 
-				Events::trigger('page_created', $id);
+				// We need to manually add this since we don't allow
+				// users to change it in the page form.
+				$input['type_id'] = $page_type_id;
 
-				$this->session->set_flashdata('success', lang('pages:create_success'));
+				// Insert the page data, along with
+				// the stream data.
+				if ($id = $this->page_m->create($input, $stream))
+				{
+					$this->createTimelineEvent($id,'created',true);
+					if (isset($input['navigation_group_id']) and count($input['navigation_group_id']) > 0)
+					{
+						$this->oxycache->delete_all('page_m');
+						$this->oxycache->delete_all('navigation_m');
+					}
 
-				// Redirect back to the form or main page
-				$input['btnAction'] == 'save_exit'
-					? redirect('admin/pages')
-					: redirect('admin/pages/edit/'.$id);
+					Events::trigger('page_created', $id);
+
+					$this->session->set_flashdata('success', lang('pages:create_success'));
+
+					// Redirect back to the form or main page
+					$input['btnAction'] == 'save_exit'
+						? redirect('admin/pages')
+						: redirect('admin/pages/edit/'.$id);
+				}
 			}
 		}
-
 		// Loop through each rule for the standard page fields and 
 		// set our current value for the form.
 		foreach ($this->page_m->fields() as $field)
@@ -513,58 +512,64 @@ class Admin extends Admin_Controller {
 		$page->restricted_to = explode(',', $page->restricted_to);
 
 		// Did they even submit?
-		//if ($this->form_validation->run())
-		//{
-		if ($input = $this->input->post())
+		if ($this->form_validation->run() AND $input = $this->input->post())
 		{
-		
+				// specific access data (used for advanced security)
+				$dpa = isset($input['direct_public_access'])?$input['direct_public_access']:[];
+				$daa = isset($input['direct_admin_access'])?$input['direct_admin_access']:[];
 
-			// specific access data (used for advanced security)
-			$dpa = isset($input['direct_public_access'])?$input['direct_public_access']:[];
-			$daa = isset($input['direct_admin_access'])?$input['direct_admin_access']:[];
-
-
-			// Were there keywords before this update?
-			if (isset($old_keywords_hash))
-			{
-				$input['old_keywords_hash'] = $old_keywords_hash;
-			}
-
-			// We need to manually add this since we don't allow
-			// users to change it in the page form.
-			$input['type_id'] = $page->type_id;
-
-			// validate and insert
-			if ($this->page_m->edit($id, $input, $stream, $page->entry_id_offline))
-			{
-
-				//now save the individual permissions
-				$this->load->model('pages/page_permissions_m');
-				$this->page_permissions_m->save($id,$dpa,$daa);
-				
-				$this->createTimelineEvent($page->id,'updated',true);
-
-				$this->session->set_flashdata('success', sprintf(lang('pages:edit_success'), $input['title']));
-
-				Events::trigger('page_updated', $id);
-
-				$this->oxycache->delete_all('page_m');
-				$this->oxycache->delete_all('navigation_m');
-
-				if($input['btnAction'] == 'publish_save')
+				// Were there keywords before this update?
+				if (isset($old_keywords_hash))
 				{
-					$publish_message = ($this->push_up_down($id, 'up'))? lang('pages:publish_success') : lang('pages:publish_fail') ;
-					//$this->session->set_flashdata('notice',$publish_message);	
+					$input['old_keywords_hash'] = $old_keywords_hash;
 				}
 
-				// Mission accomplished!
-				$input['btnAction'] == 'save_exit'
-					? redirect('admin/pages')
-					: redirect('admin/pages/edit/'.$id);
-			}
+				// We need to manually add this since we don't allow
+				// users to change it in the page form.
+				$input['type_id'] = $page->type_id;
+
+				// validate and update
+				if ($this->page_m->edit($id, $input, $stream, $page->entry_id_offline))
+				{
+
+					log_message('error',sprintf(lang('pages:edit_success'), $input['title']));
+					
+					$this->session->set_flashdata('success', sprintf(lang('pages:edit_success'), $input['title']));
+
+					Events::trigger('page_updated', $id);
+
+					$this->oxycache->delete_all('page_m');
+					$this->oxycache->delete_all('navigation_m');
+
+					//now save the individual permissions
+					$this->load->model('pages/page_permissions_m');
+					$this->page_permissions_m->save($id,$dpa,$daa);
+					
+					//$this->createTimelineEvent($page->id,'updated',true);
+
+					//$this->session->set_flashdata('success', sprintf(lang('pages:edit_success'), $input['title']));
+
+					/*
+					if($input['btnAction'] == 'publish_save')
+					{
+						$publish_message = ($this->push_up_down($id, 'up'))? lang('pages:publish_success') : lang('pages:publish_fail') ;
+						//$this->session->set_flashdata('notice',$publish_message);	
+					}
+					*/
+
+					// Mission accomplished!
+					$input['btnAction'] == 'save_exit'
+						? redirect('admin/pages')
+						: redirect('admin/pages/edit/'.$id);
+
+						log_message('debug','How did you get here ?');
+				}
+				else
+				{
+					log_message('error','Failed to save page ID:'.$id);
+				}
+			
 		}
-
-
 
 
 		// Loop through each validation rule
@@ -746,8 +751,6 @@ class Admin extends Admin_Controller {
 			return true;
 		}
 
-
-		
 		if($this->db->where('id', $page->{$published_key})->update($the_table,$draft))
 		{
 			return true;
@@ -905,7 +908,7 @@ class Admin extends Admin_Controller {
 
 
 	public function createTimelineEvent($id,$method='created',$show_actions=true) {
-
+		return;
 		$this->timeline->color('blue')->icon('page');
 		
 		if($method=='updated') {

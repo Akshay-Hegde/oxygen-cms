@@ -71,7 +71,9 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				  <i class="fa fa-bell-o "></i><!--fa-envelope-o  / -->
 				  <?php if(count($global_notifications)):?>
-				  <span class="label label-success"><?php echo count($global_notifications);?></span>
+				  <span class="label label-default"><?php echo count($global_notifications);?></span>
+				  <?php else:?>
+				  	 <span class="label label-default"></span>
 				   <?php endif;?>
 				</a>
 
@@ -110,7 +112,9 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				  <i class="fa fa-check"></i>
 					<?php if(count($todo_tasks)):?>
-						<span class="label label-warning dash_task_count"> <?php echo(count($todo_tasks));?></span>
+						<span class="label dash_task_count"> <?php echo(count($todo_tasks));?></span>
+					<?php else:?>
+						<span class="label dash_task_count"></span>
 					<?php endif;?>
 				</a>
 				<ul class="dropdown-menu">
