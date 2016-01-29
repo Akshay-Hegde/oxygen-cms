@@ -926,6 +926,14 @@ class Template
 				}
 				break;
 			}
+			else if(is_dir($location.$theme.'/views/modules/pages/sublayouts/'))
+			{
+				foreach(glob($location.$theme . '/views/modules/pages/sublayouts/*.*') as $layout)
+				{
+					$layouts[] = pathinfo($layout, PATHINFO_BASENAME);
+				}
+				break;
+			}
 		}
 
 		return $layouts;
@@ -945,16 +953,58 @@ class Template
 			// So there are no web layouts, assume all layouts are web layouts
 			if(is_dir($location.$theme.'/views/modules/pages/structs/'))
 			{
-				
 				$file_path = $location.$theme . '/views/modules/pages/structs/'.$struct_filename;
 				if(file_exists ( $file_path )) {
 
 					get_instance()->load->helper('file');
 					$out_body = read_file($file_path);
 				}
-				
 			}
+			else if(is_dir($location.$theme.'/views/modules/pages/sublayouts/'))
+			{
+				$file_path = $location.$theme . '/views/modules/pages/sublayouts/'.$struct_filename;
+				if(file_exists ( $file_path )) 
+				{
+					get_instance()->load->helper('file');
+					$out_body = read_file($file_path);
+				}
+			}			
 		}
+
+	}
+
+	public function struct_exists($struct_filename) 
+	{
+		
+		$theme  = $this->_theme;
+
+		if($struct_filename == '') {
+			return false;
+		}
+
+
+		foreach ($this->_theme_locations as $location)
+		{
+			// So there are no web layouts, assume all layouts are web layouts
+			if(is_dir($location.$theme.'/views/modules/pages/structs/'))
+			{
+				$file_path = $location.$theme . '/views/modules/pages/structs/'.$struct_filename;
+				if(file_exists ( $file_path )) {
+
+					return true;
+				}
+			}
+			else if(is_dir($location.$theme.'/views/modules/pages/sublayouts/'))
+			{
+				$file_path = $location.$theme . '/views/modules/pages/sublayouts/'.$struct_filename;
+				if(file_exists ( $file_path )) 
+				{
+					return true;
+				}
+			}			
+		}
+
+		return false;
 
 	}
 

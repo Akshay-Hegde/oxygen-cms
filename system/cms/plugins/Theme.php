@@ -45,19 +45,23 @@ class Plugin_Theme extends Plugin
 	public function _self_doc()
 	{
 		$info = array(
-			'path' => array(// the name of the method you are documenting
-				'description' => array(// a single sentence to explain the purpose of this method
+			'path' => 
+			[
+				'description' => 
+				[
 					'en' => 'Outputs the path to the theme relative to the web root.',
-				),
-				'single' => true,// will it work as a single tag?
-				'double' => false,// how about as a double tag?
-				'variables' => '',// list all variables available inside the double tag. Separate them|like|this
-				'attributes' => array(),
-			),// end path method
-			'partial' => array(// the name of the method you are documenting
-				'description' => array(// a single sentence to explain the purpose of this method
+				],
+				'single' => true,
+				'double' => false,
+				'variables' => '',
+				'attributes' => [],
+			],
+			'partial' => 
+			[
+				'description' => 
+				[
 					'en' => 'Outputs a theme partial file at the location of this tag (usually in your layout file).',
-				),
+				],
 				'single' => true,// will it work as a single tag?
 				'double' => false,// how about as a double tag?
 				'variables' => '',// list all variables available inside the double tag. Separate them|like|this
@@ -69,7 +73,7 @@ class Plugin_Theme extends Plugin
 						'required' => true,// is this attribute required?
 					),
 				),
-			),// end partial method
+			],
 			'variables' => array(
 				'description' => array(
 					'en' => 'Set and display temporary variables.',

@@ -532,6 +532,8 @@ class Admin extends Admin_Controller {
 				if ($this->page_m->edit($id, $input, $stream, $page->entry_id_offline))
 				{
 
+					$this->push_up($id);
+
 					log_message('error',sprintf(lang('pages:edit_success'), $input['title']));
 					
 					$this->session->set_flashdata('success', sprintf(lang('pages:edit_success'), $input['title']));
@@ -545,18 +547,6 @@ class Admin extends Admin_Controller {
 					$this->load->model('pages/page_permissions_m');
 					$this->page_permissions_m->save($id,$dpa,$daa);
 					
-					//$this->createTimelineEvent($page->id,'updated',true);
-
-					//$this->session->set_flashdata('success', sprintf(lang('pages:edit_success'), $input['title']));
-
-					/*
-					if($input['btnAction'] == 'publish_save')
-					{
-						$publish_message = ($this->push_up_down($id, 'up'))? lang('pages:publish_success') : lang('pages:publish_fail') ;
-						//$this->session->set_flashdata('notice',$publish_message);	
-					}
-					*/
-
 					// Mission accomplished!
 					$input['btnAction'] == 'save_exit'
 						? redirect('admin/pages')
@@ -568,7 +558,13 @@ class Admin extends Admin_Controller {
 				{
 					log_message('error','Failed to save page ID:'.$id);
 				}
-			
+		}
+		else
+		{
+			 if($this->input->post())
+			 {
+			 	$this->session->set_flashdata('error','An error occured.');
+			 }
 		}
 
 

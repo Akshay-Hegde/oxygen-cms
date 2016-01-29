@@ -1,10 +1,11 @@
-
+<!--
+Only used when sublayout isnt found
+-->
 {{ layout:partial name="title" }}
 	<h1>
 		<small></small>
 	</h1>
 {{ /layout:partial }}
-		
 		
 <div class="box box-primary">
 
@@ -13,8 +14,6 @@
 	</div>
 
 	<div class="box-body">
-
-	  <?php echo $page->layout->body; ?>
 
 	  <?php if (Settings::get('enable_comments') and $page->comments_enabled): ?>
 		  <div class="box box-default">

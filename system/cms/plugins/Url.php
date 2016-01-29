@@ -41,142 +41,174 @@ class Plugin_Url extends Plugin
 	 */
 	public function _self_doc()
 	{
-		$info = array(
-			'current' => array(
-				'description' => array(
+		$info = 
+		[
+			'current' => 
+			[
+				'description' => 
+				[
 					'en' => 'Output the current url.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(),
-				),
-			'uri_string' => array(
-				'description' => array(
+				'attributes' => [],
+			],
+			'uri_string' => 
+			[
+				'description' => 
+				[
 					'en' => 'Output the current uri string.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(),
-				),
-			'get' => array(
-				'description' => array(
+				'attributes' => [],
+			],
+			'get' => 
+			[
+				'description' => 
+				[
 					'en' => 'Retrieve a GET variable from the url.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(
-					'key' => array(
+				'attributes' => 
+				[
+					'key' => 
+					[
 						'type' => 'text',
 						'flags' => '',
 						'default' => '',
 						'required' => true,
-						),
-					),
-				),
-			'site' => array(
-				'description' => array(
+					],
+				],
+			],
+			'site' => 
+			[
+				'description' => 
+				[
 					'en' => 'Display the site url of this installation with or without the index.php (depending on url rewrite settings).',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(
-					'uri' => array(
+				'attributes' => 
+				[
+					'uri' => 
+					[
 						'type' => 'text',
 						'flags' => '',
 						'default' => '',
 						'required' => false,
-						),
-					),
-				),
-			'base' => array(
-				'description' => array(
+					],
+				],
+			],
+			'base' => 
+			[
+				'description' => 
+				[
 					'en' => 'Display the base url of the installation without the index.php.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(),
-				),
-			'segments' => array(
-				'description' => array(
+				'attributes' => [],
+			],
+			'segments' => 
+			[
+				'description' => 
+				[
 					'en' => 'Return the specified segments from the url.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(
-					'segment' => array(
+				'attributes' => 
+				[
+					'segment' => 
+					[
 						'type' => 'number',
 						'flags' => '',
 						'default' => '',
 						'required' => true,
-						),
-					'default' => array(
+					],
+					'default' => 
+					[
 						'type' => 'text',
 						'flags' => '',
 						'default' => '',
 						'required' => false,
-						),
-					),
-				),
-			'anchor' => array(
-				'description' => array(
+					],
+				],
+			],
+			'anchor' => 
+			[
+				'description' => 
+				[
 					'en' => 'Build an anchor tag with the url segments you pass in.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(
-					'segments' => array(
+				'attributes' => 
+				[
+					'segments' => 
+					[
 						'type' => 'text',
 						'flags' => '',
 						'default' => '',
 						'required' => false,
-						),
-					'title' => array(
+					],
+					'title' => 
+					[
 						'type' => 'text',
 						'flags' => '',
 						'default' => '',
 						'required' => false,
-						),
-					'class' => array(
+					],
+					'class' => 
+					[
 						'type' => 'text',
 						'flags' => '',
 						'default' => '',
 						'required' => false,
-						),
-					),
-				),
-			'is_ssl' => array(
-				'description' => array(
+					],
+				],
+			],
+			'is_ssl' => 
+			[
+				'description' => 
+				[
 					'en' => 'Returns true if the site is running on https.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(),
-				),
-			'redirect' => array(
-				'description' => array(
+				'attributes' => [],
+			],
+			'redirect' => 
+			[
+				'description' => 
+				[
 					'en' => 'Send the visitor to another url.',
-				),
+				],
 				'single' => true,
 				'double' => false,
 				'variables' => '',
-				'attributes' => array(
-					'to' => array(
+				'attributes' => 
+				[
+					'to' =>
+					[
 						'type' => 'text',
 						'flags' => '',
 						'default' => '',
 						'required' => true,
-						),
-					),
-				),
-			);
+					],
+				],
+			],
+		];
 
 		return $info;
 	}
@@ -241,7 +273,7 @@ class Plugin_Url extends Plugin
 		}
 		else
 		{
-			$query = array();
+			$query = [];
 		}
 
 		

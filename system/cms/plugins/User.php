@@ -122,7 +122,7 @@ class Plugin_User extends Plugin
 	 *
 	 *     {{ user:not_logged_in group="admin" }}
 	 *            <p>Hello not an admin</p>
-	 *     {{ endif }}
+	 *     {{ /user:not_logged_in }}
 	 *
 	 * @return boolean State indicator.
 	 */
@@ -148,7 +148,7 @@ class Plugin_User extends Plugin
 	 *
 	 *     {{ user:has_cp_permissions}}
 	 *         <a href="/admin">Access the Control Panel</a>
-	 *     {{ endif }}
+	 *     {{ /user:has_cp_permissions }}
 	 *
 	 * @return boolean State indicator.
 	 */

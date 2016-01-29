@@ -98,6 +98,10 @@ class Pages extends Public_Controller
 	 */
 	public function _page($url_segments)
 	{
+
+		$new_view = 'sublayouts/';
+		$old_view = 'page';
+		$theview = $new_view;
 	
 
 		// If we are on the development environment,
@@ -153,11 +157,19 @@ class Pages extends Public_Controller
 			}
 		}
 
+		//set default value
+		$page->layout->body = '';
+
 		//Load struct, if doesnt exist it will still work
-		$this->template->load_struct($page->layout->theme_struct,$page->layout->body);
+		if($this->template->struct_exists($page->layout->theme_struct)) {
+			$this->template->load_struct($page->layout->theme_struct,$page->layout->body);
+			$theview = $theview.$page->layout->theme_struct;
+		} else {
+			$theview = 'page';
+		}
+
 
 		$this->template->set('page', $page);
-
 
 
 		// the home page won't have a base uri
@@ -204,8 +216,6 @@ class Pages extends Public_Controller
 					redirect($refer);
 				}		
 			}
-		
-
 		}
 
 		// We want to use the valid uri from here on. Don't worry about segments passed by Streams or
@@ -237,6 +247,7 @@ class Pages extends Public_Controller
 			}
 		}
 
+
 		// If this page has an RSS feed, show it
 		if ($page->rss_enabled)
 		{
@@ -257,6 +268,7 @@ class Pages extends Public_Controller
 		{
 			$this->template->set_layout($page->layout->theme_layout);
 		}
+
 
 		// ---------------------------------
 		// Metadata
@@ -333,15 +345,17 @@ class Pages extends Public_Controller
 		// Get our stream.
 		$stream = $this->streams_m->get_stream($page->layout->stream_id);
 
-		
 		// We are going to pre-build this data so we have the data
 		// available to the template plugin (since we are pre-parsing our views).
 		$template = $this->template->build_template_data();
-
+			
 		// Parse our view file. The view file is nothing
 		// more than an echo of $page->layout->body and the
 		// comments after it (if the page has comments).
-		$html = $this->template->load_view('pages/page', array('page' => $page), false);
+		//$html = $this->template->load_view('pages/page', array('page' => $page), false);
+		$html = $this->template->load_view('pages/'.$theview, array('page' => $page), false);
+
+
 
 		if(!isset($page->core404))
 		{
