@@ -43,12 +43,18 @@
 								<label for="theme_layout"><?php echo lang('page_types:theme_layout_label');?> <span>*</span></label>
 								<div class="input"><?php echo form_dropdown('theme_layout', $theme_layouts, $page_type->theme_layout ? $page_type->theme_layout : 'default','class="form-control"'); ?></div>
 
-								<label for="theme_layout">Page Sublayout <span>*</span></label>
+								<label for="theme_layout">Page Sublayout <span>*</span>
+									<br>
+									<small>The list is showing all available sub-layouts within your active public theme.</small>
+								</label>
 								<div class="input">
-								<?php echo form_dropdown('theme_struct', [''=>'No structure'] + $theme_layouts_structs, $page_type->theme_struct ? $page_type->theme_struct : 'default','class="form-control"'); ?>
+									<?php echo form_dropdown('theme_struct', [''=>'No structure'] + $theme_layouts_structs, $page_type->theme_struct ? $page_type->theme_struct : 'default','class="form-control"'); ?>
 								</div>
 
-								<label for="save_as_files"><?php echo lang('page_types:save_as_files');?><br><small><?php echo lang('page_types:saf_instructions'); ?></small></label>
+								<label for="save_as_files"><?php echo lang('page_types:save_as_files');?>
+									<br>
+									<small><?php echo lang('page_types:saf_instructions'); ?></small>
+								</label>
 								<div class="input">
 									<?php echo form_checkbox('save_as_files', 'y', $page_type->save_as_files == 'y' ? true : false, 'id="save_as_files"'); ?>
 								</div>
