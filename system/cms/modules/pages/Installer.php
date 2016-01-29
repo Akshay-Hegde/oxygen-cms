@@ -331,7 +331,6 @@ class Installer_Pages extends Component
 			'theme_layout'=>'default.html',
 			'theme_struct'=>'standard.php',
 			'hidden'	=> 0,
-			//'body' => '{{ body }}',
 			'css' => '',
 			'js' => '',
 			'updated_on' => now()
@@ -346,7 +345,6 @@ class Installer_Pages extends Component
 			'theme_layout'=>'default.html',
 			'theme_struct'=>'contact.php',
 			'hidden'	=> 0,
-			//'body' => '{{ body }}',
 			'css' => '',
 			'js' => '',
 			'updated_on' => now()
@@ -361,7 +359,6 @@ class Installer_Pages extends Component
 			'theme_layout'=>'default.html',
 			'theme_struct'=>'404.php',
 			'hidden'	=> 0,
-			//'body' => '{{ body }}',
 			'css' => '',
 			'js' => '',
 			'updated_on' => now()

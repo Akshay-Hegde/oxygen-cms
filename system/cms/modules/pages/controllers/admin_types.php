@@ -241,7 +241,14 @@ class Admin_types extends Admin_Controller
 					$this->session->set_flashdata('success', lang('page_types:create_success_add_fields'));
 
 					// send them off to create their first fields
-					redirect('admin/pages/types/fields/' . $id);
+					//redirect('admin/pages/types/fields/' . $id);
+			
+
+					// Redirect back to the form or main page
+					$input['btnAction'] == 'save_exit'
+						?redirect('admin/pages/types/')
+						: redirect('admin/pages/types/view/' . $id);
+
 				}
 			}
 			else
