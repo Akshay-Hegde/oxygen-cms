@@ -15,17 +15,16 @@ Only used when sublayout isnt found
 
 	<div class="box-body">
 
-	  <?php if (Settings::get('enable_comments') and $page->comments_enabled): ?>
-		  <div class="box box-default">
-				<div class="box-header with-border">
-				  	<h3 class="box-title"><?php echo lang('comments:title') ?></h3>
-				</div>
-				<div class="box-body">
-					 <?php echo $this->comments->display() ?>
-					 <?php echo $this->comments->form() ?>
-				</div>
-		  </div>
-	  <?php endif ?>
+		<h3>
+			Welcome to OxygenCMS... 
+		</h3>
+
+		{{ user:has_cp_permissions}}
+			<p>
+			    It looks like this page hasnt been configured properly.<br>
+			    If you are the site owner  go to  <a href="{{url:site}}admin/pages/types">Page Types</a> and assign a sublayout to this page.
+			</p>
+		{{ /user:has_cp_permissions }}
 
 	</div>
 
